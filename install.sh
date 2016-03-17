@@ -1,9 +1,10 @@
 #!/bin/bash
+set -e
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 891251DA
 sudo add-apt-repository "deb http://104.155.109.157/ trusty main"
 sudo apt-get update
-sudo apt-get install python-data-exim metric-collector
-sudo apt-get install -f --yes
+sudo apt-get install -y python-data-exim metric-collector
+sudo apt-get install -f -y
 sudo touch /var/run/metric-collector.pid
 if [ -n $DATA_EXIM_API_KEY ]; then
 	api_key = $DATA_EXIM_API_KEY
