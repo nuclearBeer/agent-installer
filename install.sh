@@ -5,6 +5,24 @@ sudo apt-get update
 sudo apt-get install python-data-exim metric-collector
 sudo apt-get install -f --yes
 sudo touch /var/run/metric-collector.pid
-sudo sed -i.bak 's/^\(api_key=\).*/\1$DATA_EXIM_API_KEY/' /etc/data_exim_collector/collector.conf
-sudo sed -i.bak 's/^\(secret_key=\).*/\1$DATA_EXIM_SECRET_KEY/' /etc/data_exim_collector/collector.conf
+if [ -n $DATA_EXIM_API_KEY ]; then
+	api_key = $DATA_EXIM_API_KEY
+fi
+
+if [ -n $DATA_EXIM_SECRET_KEY ]; then
+	secret_key = $DATA_EXIM_SECRET_KEY
+fi
+
+if [ ! $api_key ]; then
+	printf "Please set DATA_EXIM_API_KEY evironment variable"
+	exit 1;
+fi
+
+if [ ! $secret_key ]; then
+        printf "Please set DATA_EXIM_SECRET_KEY evironment variable"
+        exit 1;
+fi
+
+sudo sed -i.bak 's/^\(api_key=\).*/\1$api_key/' /etc/data_exim_collector/collector.conf
+sudo sed -i.bak 's/^\(secret_key=\).*/\1$secret_key/' /etc/data_exim_collector/collector.conf
 sudo service metric-collector start
