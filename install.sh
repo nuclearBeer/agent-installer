@@ -1,4 +1,6 @@
 #!/bin/bash
+api_key=''
+secret_key=''
 set -e
 if [ -n $DATA_EXIM_API_KEY ]; then
 	api_key = $DATA_EXIM_API_KEY
