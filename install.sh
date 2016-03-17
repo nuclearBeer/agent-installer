@@ -1,13 +1,11 @@
 #!/bin/bash
-api_key=''
-secret_key=''
 set -e
 if [ -n $DATA_EXIM_API_KEY ]; then
-	api_key = $DATA_EXIM_API_KEY
+	api_key=$DATA_EXIM_API_KEY
 fi
 
 if [ -n $DATA_EXIM_SECRET_KEY ]; then
-	secret_key = $DATA_EXIM_SECRET_KEY
+	secret_key=$DATA_EXIM_SECRET_KEY
 fi
 
 if [ ! $api_key ]; then
