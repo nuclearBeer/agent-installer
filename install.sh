@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 891251DA
 sudo add-apt-repository "deb http://104.155.109.157/ trusty main"
 sudo apt-get update
