@@ -25,6 +25,6 @@ sudo apt-get install -y python-data-exim metric-collector
 sudo apt-get install -f -y
 sudo touch /var/run/metric-collector.pid
 
-sudo sh -c "sed -i 's/api_key=.*/api_key=$api_key/' /etc/data_exim_collector/collector.conf"
-sudo sh -c "sed -i 's/secret_key=.*/secret_key=$secret_key/' /etc/data_exim_collector/collector.conf"
+sudo sh -c "sed -i 's/api_key=.*/api_key= $api_key/' /etc/data_exim_collector/collector.conf"
+sudo sh -c "sed -i 's/secret_key=.*/secret_key= $secret_key/' /etc/data_exim_collector/collector.conf"
 sudo service metric-collector start
