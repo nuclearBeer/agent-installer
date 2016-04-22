@@ -10,19 +10,21 @@ fi
 
 host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/")
 
+echo $host_id
+
 if [ ! $api_key ]; then
-	printf "Please set DATA_EXIM_API_KEY evironment variable"
+	printf "Please set DATA_EXIM_API_KEY evironment variable\n"
 	exit 1;
 fi
 
 if [ ! $secret_key ]; then
-        printf "Please set DATA_EXIM_SECRET_KEY evironment variable"
+        printf "Please set DATA_EXIM_SECRET_KEY evironment variable\n"
         exit 1;
 fi
 
 if [ ! $host_id ]; then
-	printf "Couldn't get host_id"
-	exit 2;
+	printf "Couldn't get host_id\n"
+	exit 1;
 fi
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 891251DA
 sudo add-apt-repository "deb http://104.155.109.157/ trusty main"
