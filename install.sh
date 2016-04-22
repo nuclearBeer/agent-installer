@@ -8,8 +8,7 @@ if [ -n $DATA_EXIM_SECRET_KEY ]; then
 	secret_key=$DATA_EXIM_SECRET_KEY
 fi
 
-response=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/")
-echo $response
+host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/")
 
 if [ ! $api_key ]; then
 	printf "Please set DATA_EXIM_API_KEY evironment variable"
