@@ -8,7 +8,14 @@ if [ -n $DATA_EXIM_SECRET_KEY ]; then
 	secret_key=$DATA_EXIM_SECRET_KEY
 fi
 
-host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/")
+host_name=$HOSTNAME
+
+if [ ! $host_name ]; then
+        printf "HOSTNAME env variable shouldn't be empty\n"
+        exit 1;
+fi
+
+host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/$host_name/")
 
 echo $host_id
 
@@ -26,6 +33,7 @@ if [ ! $host_id ]; then
 	printf "Couldn't get host_id\n"
 	exit 1;
 fi
+
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 891251DA
 sudo add-apt-repository "deb http://104.155.109.157/ trusty main"
 sudo apt-get update
