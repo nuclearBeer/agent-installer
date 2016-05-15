@@ -17,7 +17,7 @@ fi
 
 host_id=`cat /etc/data_exim_collector/collector.conf | grep host_id | awk -F '=' '{print $2}'`
 
-if [! $host_id ];then
+if [ ! $host_id ]; then
 	host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/$host_name/")
 fi
 
@@ -39,7 +39,7 @@ if [ ! $host_id ]; then
 fi
 
 
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 891251DA
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 
 sudo add-apt-repository "deb http://104.155.109.157/ trusty main"
 sudo apt-get update
 sudo apt-get install -y python-data-exim python-requests metric-collector
