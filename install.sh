@@ -15,7 +15,11 @@ if [ ! $host_name ]; then
         exit 1;
 fi
 
-host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/$host_name/")
+host_id=`cat /etc/data_exim_collector/collector.conf | grep host_id | awk -F '=' '{print $2}'`
+
+if [! $host_id ];then
+	host_id=$(curl -sb -H "http://146.148.19.93:8888/v1.0/metrics/host_id/$secret_key/$api_key/$host_name/")
+fi
 
 echo $host_id
 
@@ -33,6 +37,7 @@ if [ ! $host_id ]; then
 	printf "Couldn't get host_id\n"
 	exit 1;
 fi
+
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 891251DA
 sudo add-apt-repository "deb http://104.155.109.157/ trusty main"
